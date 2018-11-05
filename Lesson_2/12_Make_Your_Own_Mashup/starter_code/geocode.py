@@ -1,14 +1,42 @@
 import httplib2
 import json
+from urllib.parse import urlencode
+
+
+def loadKey(name):
+    with open('keys.json', 'r') as f:
+        keys = json.loads(f.read())
+    return keys[name]
+
+
+google_api_key = loadKey('google_maps')
+
+
+def getGeocodeUrl(address):
+    '''
+    Encode the address into a url suitable for calling the Google
+    Geocode API
+    '''
+    params = {
+        'address': address,
+        'key': google_api_key
+    }
+    query = urlencode(params)
+    return 'https://maps.googleapis.com/maps/api/geocode/json?{}'.format(query)
+
 
 def getGeocodeLocation(inputString):
-    # Use Google Maps to convert a location into Latitute/Longitute coordinates
-    # FORMAT: https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=API_KEY
-    google_api_key = "PASTE_YOUR_KEY_HERE"
-    locationString = inputString.replace(" ", "+")
-    url = ('https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s'% (locationString, google_api_key))
+    '''
+    Use Google Maps to convert a location into Latitute/Longitute coordinates
+    '''
+    url = getGeocodeUrl(inputString)
     h = httplib2.Http()
     result = json.loads(h.request(url,'GET')[1])
     latitude = result['results'][0]['geometry']['location']['lat']
     longitude = result['results'][0]['geometry']['location']['lng']
     return (latitude,longitude)
+
+
+if __name__ == '__main__':
+    print(getGeocodeUrl("Tokyo, Japan"))
+    print(getGeocodeLocation("Jakarta, Indonesia"))
