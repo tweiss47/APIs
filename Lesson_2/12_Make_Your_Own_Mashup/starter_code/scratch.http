@@ -1,0 +1,30 @@
+######
+GET https://api.foursquare.com/v2/venues/explore
+    ?client_id=BSE0LQOQ4MN2JTJJ4GPMHVQNZINDQTRHZ1YQTCWFIIF2BWOX
+    &client_secret=MQ2DYD0FPKKWOX1L5Q2AN1Y31VTUVW0J5BLSIBCGABTFJMJN
+    &v=20180323
+    &ll=40.7243,-74.0018
+    &query=coffee
+    &limit=1
+
+#######
+GET https://api.foursquare.com/v2/venues/search
+    ?client_id=BSE0LQOQ4MN2JTJJ4GPMHVQNZINDQTRHZ1YQTCWFIIF2BWOX
+    &client_secret=MQ2DYD0FPKKWOX1L5Q2AN1Y31VTUVW0J5BLSIBCGABTFJMJN
+    &v=20180323
+    &ll=40.7243,-74.0018
+    &radius=250
+    &intent=browse
+    &query=coffee
+    &limit=1
+
+#######
+GET https://api.foursquare.com/v2/venues/5703f9a5cd1014db975d2d21/photos
+    ?client_id=BSE0LQOQ4MN2JTJJ4GPMHVQNZINDQTRHZ1YQTCWFIIF2BWOX
+    &client_secret=MQ2DYD0FPKKWOX1L5Q2AN1Y31VTUVW0J5BLSIBCGABTFJMJN
+    &v=20180323
+    &group=venue
+    &limit=1
+
+
+# browse parameter
